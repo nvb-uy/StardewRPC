@@ -1,8 +1,0 @@
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\bin\Debug\net6.0\StardewRPC.deps.json
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\bin\Debug\net6.0\StardewRPC.dll
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\obj\Debug\net6.0\StardewRPC.csproj.AssemblyReference.cache
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\obj\Debug\net6.0\StardewRPC.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\obj\Debug\net6.0\StardewRPC.AssemblyInfoInputs.cache
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\obj\Debug\net6.0\StardewRPC.AssemblyInfo.cs
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\obj\Debug\net6.0\StardewRPC.csproj.CoreCompileInputs.cache
-C:\Users\Nicole\Desktop\Proyectoides\StardewRPC\StardewRPC\obj\Debug\net6.0\StardewRPC.dll
