@@ -19,7 +19,7 @@ namespace StardewRPC {
 
         private DiscordRpcClient? rpcClient;
 
-        private Config CONFIG = new Config();
+        internal static Config CONFIG { get; private set; } = null!;
 
         /*********
         ** Public methods
@@ -28,7 +28,7 @@ namespace StardewRPC {
         /// <param name="helper">Provides simplified APIs for writing mods.</param>
         /// 
         public override void Entry(IModHelper helper) {
-            this.CONFIG = this.Helper.ReadConfig<Config>();
+            CONFIG = this.Helper.ReadConfig<Config>();
 
             rpcClient = new DiscordRpcClient(CONFIG.ClientID);
 
@@ -43,7 +43,7 @@ namespace StardewRPC {
         }
 
         private void UpdateTicked(object? sender, UpdateTickedEventArgs e) {
-            if (e.IsMultipleOf(((uint) this.CONFIG.Update_Rate_Seconds) * 60)) {
+            if (e.IsMultipleOf(((uint) CONFIG.Update_Rate_Seconds) * 60)) {
                 if (Context.IsWorldReady) {
                     if (Context.IsMultiplayer) {
                         updateRPC(2);
@@ -78,7 +78,7 @@ namespace StardewRPC {
         // 1: Singleplayer
         // 2: Co-op
         private void updateRPC(int state) {
-            if (!this.CONFIG.Enable || rpcClient == null) return;
+            if (!CONFIG.Enable || rpcClient == null) return;
 
             string Details;
             string State;
@@ -90,41 +90,40 @@ namespace StardewRPC {
             switch (state)
             {
                 case 1:
-                    this.CONFIG.Singleplayer.updatePlaceholders(getPlaceholders());
+                    CONFIG.Singleplayer.updatePlaceholders(getPlaceholders());
 
-                    Details = this.CONFIG.Singleplayer.Details;
-                    State = this.CONFIG.Singleplayer.State;
-                    LargeImageKey = this.CONFIG.Singleplayer.LargeImageKey;
-                    LargeImageText = this.CONFIG.Singleplayer.LargeImageText;
-                    SmallImageKey = this.CONFIG.Singleplayer.SmallImageKey;
-                    SmallImageText = this.CONFIG.Singleplayer.SmallImageText;
+                    Details = CONFIG.Singleplayer.Details;
+                    State = CONFIG.Singleplayer.State;
+                    LargeImageKey = CONFIG.Singleplayer.LargeImageKey;
+                    LargeImageText = CONFIG.Singleplayer.LargeImageText;
+                    SmallImageKey = CONFIG.Singleplayer.SmallImageKey;
+                    SmallImageText = CONFIG.Singleplayer.SmallImageText;
                     break;
 
                 case 2:
-                    this.CONFIG.Multiplayer.updatePlaceholders(getPlaceholders());
+                    CONFIG.Multiplayer.updatePlaceholders(getPlaceholders());
 
-                    Details = this.CONFIG.Multiplayer.Details;
-                    State = this.CONFIG.Multiplayer.State;
-                    LargeImageKey = this.CONFIG.Multiplayer.LargeImageKey;
-                    LargeImageText = this.CONFIG.Multiplayer.LargeImageText;
-                    SmallImageKey = this.CONFIG.Multiplayer.SmallImageKey;
-                    SmallImageText = this.CONFIG.Multiplayer.SmallImageText;
+                    Details = CONFIG.Multiplayer.Details;
+                    State = CONFIG.Multiplayer.State;
+                    LargeImageKey = CONFIG.Multiplayer.LargeImageKey;
+                    LargeImageText = CONFIG.Multiplayer.LargeImageText;
+                    SmallImageKey = CONFIG.Multiplayer.SmallImageKey;
+                    SmallImageText = CONFIG.Multiplayer.SmallImageText;
                     break;
 
                 default:
-                    this.CONFIG.Main_Menu.updatePlaceholders(getPlaceholders());
+                    CONFIG.Main_Menu.updatePlaceholders(getPlaceholders());
 
-                    Details = this.CONFIG.Main_Menu.Details;
-                    State = this.CONFIG.Main_Menu.State;
-                    LargeImageKey = this.CONFIG.Main_Menu.LargeImageKey;
-                    LargeImageText = this.CONFIG.Main_Menu.LargeImageText;
-                    SmallImageKey = this.CONFIG.Main_Menu.SmallImageKey;
-                    SmallImageText = this.CONFIG.Main_Menu.SmallImageText;
+                    Details = CONFIG.Main_Menu.Details;
+                    State = CONFIG.Main_Menu.State;
+                    LargeImageKey = CONFIG.Main_Menu.LargeImageKey;
+                    LargeImageText = CONFIG.Main_Menu.LargeImageText;
+                    SmallImageKey = CONFIG.Main_Menu.SmallImageKey;
+                    SmallImageText = CONFIG.Main_Menu.SmallImageText;
                     break;
             }
 
-            rpcClient.SetPresence(new RichPresence()
-            {
+            rpcClient.SetPresence(new RichPresence() {
                 Details = Details,
                 State = State,
 

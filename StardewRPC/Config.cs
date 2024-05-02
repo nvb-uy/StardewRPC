@@ -91,9 +91,8 @@ namespace StardewRPC {
             }
         }
 
-        public mainMenu Main_Menu { get; } = new mainMenu();
-        public singlePlayer Singleplayer { get; } = new singlePlayer();
-        
-        public multiPlayer Multiplayer { get; } = new multiPlayer();
+        public mainMenu Main_Menu { get; set; } = new mainMenu();
+        public singlePlayer Singleplayer { get; set; } = new singlePlayer();
+        public multiPlayer Multiplayer { get; set; } = new multiPlayer();
     }
 }
