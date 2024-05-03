@@ -12,6 +12,8 @@ using StardewValley.Network;
 
 using Newtonsoft.Json;
 using LogLevel = StardewModdingAPI.LogLevel;
+using Microsoft.Xna.Framework.Input;
+using System.Collections.Generic;
 
 namespace StardewRPC {
     /// <summary>The mod entry point.</summary>
@@ -86,6 +88,8 @@ namespace StardewRPC {
             string LargeImageText;
             string SmallImageKey;
             string SmallImageText;
+            List<string> Button1 = new List<string> { "", "" };
+            List<string> Button2 = new List<string> { "", "" }; ;
 
             switch (state)
             {
@@ -98,6 +102,8 @@ namespace StardewRPC {
                     LargeImageText = CONFIG.Singleplayer.LargeImageText;
                     SmallImageKey = CONFIG.Singleplayer.SmallImageKey;
                     SmallImageText = CONFIG.Singleplayer.SmallImageText;
+                    if (CONFIG.Singleplayer.Button1.enabled) Button1 = new List<string> { CONFIG.Singleplayer.Button1.Label, CONFIG.Singleplayer.Button1.URL };
+                    if (CONFIG.Singleplayer.Button2.enabled) Button2 = new List<string> { CONFIG.Singleplayer.Button2.Label, CONFIG.Singleplayer.Button2.URL };
                     break;
 
                 case 2:
@@ -109,6 +115,8 @@ namespace StardewRPC {
                     LargeImageText = CONFIG.Multiplayer.LargeImageText;
                     SmallImageKey = CONFIG.Multiplayer.SmallImageKey;
                     SmallImageText = CONFIG.Multiplayer.SmallImageText;
+                    if (CONFIG.Multiplayer.Button1.enabled) Button1 = new List<string> { CONFIG.Multiplayer.Button1.Label, CONFIG.Multiplayer.Button1.URL };
+                    if (CONFIG.Multiplayer.Button2.enabled) Button2 = new List<string> { CONFIG.Multiplayer.Button2.Label, CONFIG.Multiplayer.Button2.URL };
                     break;
 
                 default:
@@ -120,12 +128,30 @@ namespace StardewRPC {
                     LargeImageText = CONFIG.Main_Menu.LargeImageText;
                     SmallImageKey = CONFIG.Main_Menu.SmallImageKey;
                     SmallImageText = CONFIG.Main_Menu.SmallImageText;
+
+                    if (CONFIG.Main_Menu.Button1.enabled) Button1 = new List<string> { CONFIG.Main_Menu.Button1.Label, CONFIG.Main_Menu.Button1.URL };
+                    if (CONFIG.Main_Menu.Button2.enabled) Button2 = new List<string> { CONFIG.Main_Menu.Button2.Label, CONFIG.Main_Menu.Button2.URL };
                     break;
             }
+
+            List<Button> buttonsList = new List<Button>();
+
+            if (!string.IsNullOrEmpty(Button1[0]))
+            {
+                buttonsList.Add(new Button { Label = Button1[0], Url = Button1[1] });
+            }
+
+            if (!string.IsNullOrEmpty(Button2[0]))
+            {
+                buttonsList.Add(new Button { Label = Button2[0], Url = Button2[1] });
+            }
+
+            Button[] buttons = buttonsList.ToArray();
 
             rpcClient.SetPresence(new RichPresence() {
                 Details = Details,
                 State = State,
+                Buttons = buttons,
 
                 Assets = new Assets()
                 {
@@ -134,6 +160,7 @@ namespace StardewRPC {
                     SmallImageKey = SmallImageKey,
                     SmallImageText = SmallImageText
                 }
+
             });
         }
     }

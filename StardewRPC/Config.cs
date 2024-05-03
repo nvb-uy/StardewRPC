@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DiscordRPC;
+using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
@@ -12,6 +13,12 @@ namespace StardewRPC {
         public String ClientID { get; set; } = "1233785540982345870";
         public int Update_Rate_Seconds { get; set; } = 10;
 
+        public class rpcButton {
+            public Boolean enabled { get; set; }
+            public string Label { get; set; }
+            public string URL { get; set; }
+        }
+
         public class mainMenu { 
             public String Details { get; set; } = "Playing modded Stardew Valley";
             public String State { get; set; } = "In the Main Menu";
@@ -19,6 +26,9 @@ namespace StardewRPC {
             public String LargeImageText { get; set; } = "Playing modded Stardew Valley with %MODS% mods!";
             public String SmallImageKey { get; set; } = "chicken";
             public String SmallImageText { get; set; } = "Playing modded Stardew Valley with %MODS% mods!";
+          
+            public rpcButton Button1 { get; set; } = new rpcButton { enabled = false, Label = "Button 1", URL = "https://www.curseforge.com/stardewvalley/mods/stardewrpc" };
+            public rpcButton Button2 { get; set;  } = new rpcButton { enabled = false, Label = "Button 2", URL = "https://www.curseforge.com/stardewvalley/mods/stardewrpc" };
 
             public void updatePlaceholders(Dictionary<string, string> dictionary) {
                 foreach (var property in this.GetType().GetProperties()) {
@@ -43,6 +53,9 @@ namespace StardewRPC {
             public String LargeImageText { get; set; } = "Playing modded Stardew Valley with %MODS% mods!";
             public String SmallImageKey { get; set; } = "chicken";
             public String SmallImageText { get; set; } = "Playing modded Stardew Valley with %MODS% mods!";
+
+            public rpcButton Button1 { get; set; } = new rpcButton { enabled = false, Label = "Button 1", URL = "https://www.curseforge.com/stardewvalley/mods/stardewrpc" };
+            public rpcButton Button2 { get; set; } = new rpcButton { enabled = false, Label = "Button 2", URL = "https://www.curseforge.com/stardewvalley/mods/stardewrpc" };
 
             public void updatePlaceholders(Dictionary<string, string> dictionary)
             {
@@ -71,6 +84,9 @@ namespace StardewRPC {
             public String LargeImageText { get; set; } = "Playing modded Stardew Valley with %MODS% mods!";
             public String SmallImageKey { get; set; } = "chicken";
             public String SmallImageText { get; set; } = "Playing modded Stardew Valley with %MODS% mods!";
+
+            public rpcButton Button1 { get; set; } = new rpcButton { enabled = false, Label = "Button 1", URL = "https://www.curseforge.com/stardewvalley/mods/stardewrpc" };
+            public rpcButton Button2 { get; set;  } = new rpcButton { enabled = false, Label = "Button 2", URL = "https://www.curseforge.com/stardewvalley/mods/stardewrpc" };
 
             public void updatePlaceholders(Dictionary<string, string> dictionary)
             {
